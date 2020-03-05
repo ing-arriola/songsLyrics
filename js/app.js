@@ -1,6 +1,5 @@
 import * as ui from './interfaz.js'
-
-console.log(ui)
+import {API} from './api.js'
 
 ui.formToSearch.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -17,5 +16,10 @@ ui.formToSearch.addEventListener('submit',(e)=>{
         }, 2000);
     } else {
         //Form complete
+        const api=new API(artist,song)
+        api.queryToAPI()
+            .then(data=>{
+                console.log(data)
+            })
     }
 })
