@@ -19,7 +19,18 @@ ui.formToSearch.addEventListener('submit',(e)=>{
         const api=new API(artist,song)
         api.queryToAPI()
             .then(data=>{
-                console.log(data)
+                if (data.lyrics) {
+                    ui.resultado.innerHTML=data.lyrics
+                } else {
+                    ui.resultado.innerHTML=''
+                    ui.mensajes.innerHTML='Error at song or artist, please check'
+                    ui.mensajes.classList.add('error')
+                    setTimeout(() => {
+                        ui.mensajes.innerHTML=''
+                        ui.mensajes.classList.remove('error')
+                    }, 3000)
+                    ui.formToSearch.reset()
+                }
             })
     }
 })
